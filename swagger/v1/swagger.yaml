@@ -1,0 +1,279 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/teams":
+    post:
+      summary: Creates a team
+      tags:
+      - Teams
+      parameters: []
+      responses:
+        '201':
+          description: team created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                region:
+                  type: string
+              required:
+              - name
+              - region
+    get:
+      summary: Retrieves all Teams
+      tags:
+      - Teams
+      responses:
+        '200':
+          description: Teams found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - name
+                - region
+  "/api/v1/teams/{id}":
+    get:
+      summary: Retrives a team
+      tags:
+      - Teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: team found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - id
+                - name
+                - region
+        '404':
+          description: team not found
+          content: {}
+    delete:
+      summary: Deletes a team
+      tags:
+      - Teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Team deleted
+          content: {}
+        '404':
+          description: Team no found
+          content: {}
+    patch:
+      summary: Updates a team
+      tags:
+      - Teams
+      parameters: []
+      responses:
+        '201':
+          description: team updated
+          content: {}
+        '404':
+          description: team not found
+          content: {}
+        '401':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                region:
+                  type: string
+              required:
+              - name
+              - region
+  "/api/v1/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+                gender:
+                  type: string
+                team_id:
+                  type: integer
+              required:
+              - name
+              - phone
+              - gender
+              - team_id
+    get:
+      summary: Retrieves all Users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Users found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  gender:
+                    type: string
+                  team_id:
+                    type: integer
+                required:
+                - name
+                - phone
+                - gender
+                - team_id
+  "/api/v1/users/{id}":
+    get:
+      summary: Retrives a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  gender:
+                    type: string
+                  team_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - phone
+                - gender
+                - team_id
+        '404':
+          description: user not found
+          content: {}
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User deleted
+          content: {}
+        '404':
+          description: User no found
+          content: {}
+    patch:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user updated
+          content: {}
+        '404':
+          description: user not found
+          content: {}
+        '401':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+                gender:
+                  type: string
+                team_id:
+                  type: integer
+              required:
+              - name
+              - phone
+              - gender
+              - team_id
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
