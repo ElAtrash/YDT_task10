@@ -29,7 +29,9 @@ users_attributes = []
   user = {
     name: Faker::Name.unique.name,
     phone: Faker::PhoneNumber.unique.cell_phone_with_country_code,
-    gender: Faker::Gender.binary_type.downcase
+    gender: Faker::Gender.binary_type.downcase,
+    email: Faker::Internet.unique.email,
+    password: Faker::Internet.password(min_length: 6)
     }
 
   users_attributes << user

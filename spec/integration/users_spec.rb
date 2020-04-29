@@ -6,6 +6,7 @@ describe 'Users API' do
 
     post 'Creates a user' do
       tags 'Users'
+      parameter name: 'Authorization', in: :header, type: :string, default: 'Bearer c36e6eadde881ca7'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {
@@ -14,18 +15,25 @@ describe 'Users API' do
           name: { type: :string },
           phone: { type: :string },
           gender: { type: :string },
-          team_id: {type: :integer}
+          team_id: {type: :integer},
+          email: {type: :string},
+          password: {type: :string}
         },
-        required: [ 'name', 'phone', 'gender', 'team_id' ]
+        required: [ 'name', 'phone', 'gender', 'team_id', 'email', 'password' ]
       }
 
       response '201', 'user created' do
-        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: '1' } }
+        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: '1', email: 'user1@user.user', password: 'dsidjjisdj' } }
         run_test!
       end
 
       response '422', 'invalid request' do
         let(:user) { { name: nil } }
+        run_test!
+      end
+
+      response '401', :unauthorized do
+        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: '1', email: 'user1@user.user', password: 'dsidjjisdj' } }
         run_test!
       end
     end
@@ -43,10 +51,11 @@ describe 'Users API' do
           name: { type: :string },
           phone: { type: :string },
           gender: { type: :string },
-          team_id: {type: :integer}
+          team_id: {type: :integer},
+          email: {type: :string}
         },
-        required: [ 'name', 'phone', 'gender', 'team_id' ]
-        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1 } }
+        required: [ 'name', 'phone', 'gender', 'team_id', 'email' ]
+        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1, email: 'user1@user.user' } }
         run_test!
       end
     end
@@ -66,11 +75,12 @@ describe 'Users API' do
             name: { type: :string },
             phone: { type: :string },
             gender: { type: :string },
-            team_id: {type: :integer}
+            team_id: {type: :integer},
+            email: {type: :string}
           },
-          required: [ 'id', 'name', 'phone', 'gender', 'team_id' ]
+          required: [ 'id', 'name', 'phone', 'gender', 'team_id', 'email' ]
 
-          let(:id) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1 } }
+          let(:id) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1, email: 'user@user.user' } }
           run_test!
       end
 
@@ -107,13 +117,14 @@ describe 'Users API' do
           name: { type: :string },
           phone: { type: :string },
           gender: { type: :string },
-          team_id: {type: :integer}
+          team_id: {type: :integer},
+          email: {type: :string}
         },
-        required: [ 'name', 'phone', 'gender', 'team_id' ]
+        required: [ 'name', 'phone', 'gender', 'team_id', 'email' ]
       }
 
       response '201', 'user updated' do
-        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1 } }
+        let(:user) { { name: 'user1', phone: '12345', gender: 'male', team_id: 1, email: 'user@user.user' } }
         run_test!
       end
 

@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_api_v1_user!
   before_action :set_team, except: [:home]
   before_action :set_team_user, only: [:show, :update, :destroy]
 

@@ -26,9 +26,15 @@ gem 'faker'
 # seamlessly adds a Swagger
 gem 'rswag-api'
 gem 'rswag-ui'
+# user auth
+gem 'devise'
+# JWT token auth with devise
+gem 'devise-jwt', '~> 0.6.0'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
+# A Ruby gem to load environment variables from `.env`
+gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

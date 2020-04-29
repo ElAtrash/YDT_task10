@@ -20,9 +20,9 @@ class Api::V1::TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      render json: @team
+      render json: @team, status: :created
     else
-      render error: { error: 'Unable to create Team.' }, status: 400
+      render error: { error: 'Unable to create Team.' }, status: :unprocessable_entity
     end
   end
 
@@ -31,14 +31,14 @@ class Api::V1::TeamsController < ApplicationController
       @team.update(team_params)
       render json: { message: 'Team successfully updated.' }, status: 200
     else
-      render json: { error: 'Unable to updte Team.' }, status: 400
+      render json: { error: 'Unable to updte Team.' }, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @team
       @team.destroy
-      render json: {message: 'Team was successfully deleted.'}, status: 200
+      render json: {message: 'Team was successfully deleted.'}, status: 204
     else
       render json: { error: 'Unable to delete Team.'}, status: 400
     end
